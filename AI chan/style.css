@@ -1,0 +1,305 @@
+:root {
+  --primary-color: #3f51b5;
+  --secondary-color: #ff7043;
+  --accent-color: #4caf50;
+  --light-bg: #f5f7fa;
+  --dark-text: #2d3436;
+  --light-text: #f5f6fa;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--light-bg);
+  color: var(--dark-text);
+  margin: 0;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin: 2rem 0 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+}
+
+h3::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--secondary-color);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+button#diagnosaBtn {
+  display: block;
+  margin: 2.5rem auto;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary-color), #5c6bc0);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+button#diagnosaBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+button#diagnosaBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(63, 81, 181, 0.3);
+}
+
+button#diagnosaBtn:hover::before {
+  left: 100%;
+}
+
+button#diagnosaBtn:active {
+  transform: translateY(-1px);
+}
+
+.gejala-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.gejala {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.95rem;
+  color: var(--dark-text);
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.gejala::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--primary-color);
+  transition: height 0.3s ease;
+}
+
+.gejala:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: #bdbdbd;
+}
+
+.gejala:hover::before {
+  height: 100%;
+}
+
+.gejala.selected {
+  background-color: #e8f5e9;
+  border-color: var(--accent-color);
+  color: #2e7d32;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+  transform: scale(1.03);
+}
+
+.gejala.selected::before {
+  height: 100%;
+  background: var(--accent-color);
+}
+
+#hasil {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+#hasil::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+}
+
+#hasil div {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  transition: var(--transition);
+}
+
+#hasil div:hover {
+  transform: translateX(5px);
+}
+
+#hasil strong {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+#hasil hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ddd, transparent);
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .gejala-container {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem;
+  }
+  
+  .gejala {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  #hasil {
+    padding: 1.5rem;
+  }
+}
+
+/* Animation for results */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#hasil > * {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Loading state */
+.loading-spinner {
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin: 2rem auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Navbar */
+nav {
+  background-color: #3f51b5; /* Warna latar belakang navbar */
+  padding: 1rem 2rem; /* Padding di dalam navbar */
+  width: 100%; /* Memastikan navbar memenuhi lebar penuh */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box; /* Menghindari padding mempengaruhi lebar */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem; /* Spasi antar item navbar */
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ff7043; /* Warna berubah saat hover */
+}
+
+/* Tombol Back */
+nav .back-button {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: #ff7043;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+nav .back-button:hover {
+  background: #3f51b5;
+  color: #fff;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  nav .back-button {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+}

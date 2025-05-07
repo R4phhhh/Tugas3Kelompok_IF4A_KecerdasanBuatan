@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Tugas AI</title>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="gejala-penyakit.html">Daftar Gejala dan Penyakit</a></li>
+      <li><a href="base.html" class="back-button">Diagnosa</a></li>
+    </ul>
+  </nav>
+
+  <!-- Gejala Container -->
+  <div class="gejala-container" id="gejalaContainer"></div>
+
+  <!-- Diagnosa Button -->
+  <button id="diagnosaBtn">Diagnosa Sekarang</button>
+
+  <!-- Hasil Diagnosa -->
+  <div id="hasil"></div>
+
+  <script defer>
+    window.addEventListener("DOMContentLoaded", () => {
+      const daftarGejala = [
+        "demam", "sakit kepala", "nyeri saat bicara atau menelan", "batuk", "hidung tersumbat",
+        "nyeri telinga", "nyeri tenggorokan", "hidung meler", "letih dan lesu", "mual dan muntah",
+        "selaput lendir merah dan bengkak", "ada benjolan di leher", "nyeri leher",
+        "pembengkakan kelenjar getah bening", "pendarahan hidung", "suara serak",
+        "bola mata bergerak tanpa sadar", "dahi sakit", "leher bengkak", "tuli",
+        "ada yang tumbuh di mulut", "air liur menetes", "berat badan turun",
+        "bunyi nafas abnormal", "infeksi sinus", "nyeri antara mata", "nyeri pinggir hidung",
+        "nyeri wajah", "perubahan kulit", "perubahan suara", "radang gendang telinga",
+        "sakit gigi", "serangan vertigo", "telinga berdenging", "telinga terasa penuh",
+        "tenggorokan gatal", "tubuh tak seimbang"
+      ];
+
+      const daftarPenyakit = [
+        { nama: "Contract Ulcers", gejala: [2, 15] },
+        { nama: "Abses Parafaringeal", gejala: [2, 18] },
+        { nama: "Abses Peritonsiler", gejala: [0, 1, 6, 13, 15, 21] },
+        { nama: "Barotitis Media", gejala: [1, 5] },
+        { nama: "Deviasi Septum", gejala: [0, 4, 5, 14, 24, 28] },
+        { nama: "Faringitis", gejala: [0, 2, 6, 12, 13] },
+        { nama: "Kanker Laring", gejala: [2, 3, 6, 12, 15, 22, 23] },
+        { nama: "Kanker Leher dan Kepala", gejala: [2, 11, 14, 20, 29, 30] },
+        { nama: "Kanker Leher Metastatik", gejala: [11] },
+        { nama: "Kanker Nasofaring", gejala: [4, 14] },
+        { nama: "Kanker Tonsil", gejala: [6, 11] },
+        { nama: "Laringitis", gejala: [0, 2, 13, 18, 36] },
+        { nama: "Neuronitis Vestibularis", gejala: [9, 16] },
+        { nama: "Otosklerosis", gejala: [19, 34] },
+        { nama: "Otitis Media Akut", gejala: [0, 5, 9, 31] },
+        { nama: "Meniere", gejala: [5, 9, 33, 35] },
+        { nama: "Tonsilitis", gejala: [0, 1, 2, 3, 6, 9] },
+        { nama: "Tumor Syaraf Pendengaran", gejala: [1, 19, 37] },
+        { nama: "Vertigo Postular", gejala: [16] },
+        { nama: "Sinusitis Maksilaris", gejala: [0, 1, 3, 4, 7, 8, 10, 27, 32] },
+        { nama: "Sinusitis Frontalis", gejala: [0, 1, 3, 4, 7, 8, 10, 17] },
+        { nama: "Sinusitis Etmoidal", gejala: [0, 1, 3, 4, 7, 8, 10, 17, 25, 26] },
+        { nama: "Sinusitis Sfenoidal", gejala: [0, 1, 3, 4, 5, 7, 8, 10, 11] },
+        { nama: "Perut", gejala: [0, 1, 2, 3] }
+      ];
+
+      const container = document.getElementById("gejalaContainer");
+      const diagnosaBtn = document.getElementById("diagnosaBtn");
+      const hasil = document.getElementById("hasil");
+      const gejalaTerpilih = new Set();
+      const divs = [];
+
+      // Tampilkan daftar gejala
+      daftarGejala.forEach((gejala, index) => {
+        const div = document.createElement('div');
+        div.className = 'gejala';
+        div.dataset.index = index;
+        div.innerText = gejala.charAt(0).toUpperCase() + gejala.slice(1);
+
+        div.addEventListener('click', () => {
+          if (div.classList.contains('selected')) {
+            div.classList.remove('selected');
+            gejalaTerpilih.delete(index);
+          } else {
+            div.classList.add('selected');
+            gejalaTerpilih.add(index);
+          }
+        });
+
+        container.appendChild(div);
+        divs.push(div);
+      });
+
+      // Fungsi Diagnosa
+      diagnosaBtn.addEventListener("click", () => {
+        hasil.innerHTML = "";
+
+        const hasilDiagnosa = daftarPenyakit
+          .map(penyakit => {
+            const cocok = penyakit.gejala.filter(g => gejalaTerpilih.has(g));
+            const persentase = (cocok.length / penyakit.gejala.length) * 100;
+            return {
+              nama: penyakit.nama,
+              cocok,
+              persentase
+            };
+          })
+          .filter(p => p.cocok.length > 0)
+          .sort((a, b) => b.persentase - a.persentase); // urut dari persentase tertinggi
+
+        if (hasilDiagnosa.length === 0) {
+          hasil.innerHTML = "<p><strong>Tidak ada penyakit yang cocok ditemukan.</strong></p>";
+        } else {
+          hasil.innerHTML = "<h3>Hasil Diagnosa:</h3>";
+          hasilDiagnosa.forEach(penyakit => {
+            const namaGejala = penyakit.cocok.map(i => daftarGejala[i]).join(", ");
+            hasil.innerHTML += `
+              <div>
+                <strong>${penyakit.nama}</strong><br/>
+                Cocok dengan gejala: ${namaGejala}<br/>
+                Persentase kecocokan: ${penyakit.persentase.toFixed(2)}%
+                <hr/>
+              </div>
+            `;
+          });
+        }
+
+        // Reset pilihan
+        gejalaTerpilih.clear();
+        divs.forEach(div => div.classList.remove('selected'));
+      });
+    });
+  </script>
+</body>
+
+</html>
