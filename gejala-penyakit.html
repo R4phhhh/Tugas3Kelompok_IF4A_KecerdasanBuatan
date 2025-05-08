@@ -17,16 +17,34 @@
     </nav>
 
 
-    <!-- Konten Halaman -->
+    <!-- Daftar Gejala -->
     <div id="gejalaContainer" class="container">
         <h2>Daftar Gejala</h2>
-        <div class="gejala-container"></div>
+        <table class="tabel-gejala">
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="gejala-container"></tbody>
+        </table>
     </div>
 
+    <!-- Daftar Penyakit -->
     <div id="penyakitContainer" class="container">
         <h2>Daftar Penyakit</h2>
-        <div class="penyakit-container"></div>
+        <table class="tabel-penyakit">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Penyakit</th>
+                    <th>Gejala</th>
+                </tr>
+            </thead>
+            <tbody class="penyakit-container"></tbody>
+        </table>
     </div>
+
 
     <script defer>
         window.addEventListener("DOMContentLoaded", () => {
@@ -70,23 +88,23 @@
                 { nama: "Perut", gejala: [0, 1, 2, 3] }
             ];
 
-            // Tampilkan daftar gejala
+            // Tampilkan daftar gejala dalam tabel
             const gejalaContainer = document.querySelector('.gejala-container');
-            daftarGejala.forEach(gejala => {
-                const div = document.createElement('div');
-                div.className = 'gejala';
-                div.innerText = gejala.charAt(0).toUpperCase() + gejala.slice(1);
-                gejalaContainer.appendChild(div);
+            daftarGejala.forEach((gejala, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${index + 1}</td><td>${gejala.charAt(0).toUpperCase() + gejala.slice(1)}</td>`;
+                gejalaContainer.appendChild(row);
             });
 
-            // Tampilkan daftar penyakit
+            // Tampilkan daftar penyakit dalam tabel
             const penyakitContainer = document.querySelector('.penyakit-container');
-            daftarPenyakit.forEach(penyakit => {
-                const div = document.createElement('div');
-                div.className = 'penyakit';
-                div.innerHTML = `<strong>${penyakit.nama}</strong><br/>Gejala: ${penyakit.gejala.map(g => daftarGejala[g]).join(", ")}`;
-                penyakitContainer.appendChild(div);
+            daftarPenyakit.forEach((penyakit, index) => {
+                const gejalaList = penyakit.gejala.map(g => daftarGejala[g]).join(", ");
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${index + 1}</td><td><strong>${penyakit.nama}</strong></td><td>${gejalaList}</td>`;
+                penyakitContainer.appendChild(row);
             });
+
         });
     </script>
 </body>

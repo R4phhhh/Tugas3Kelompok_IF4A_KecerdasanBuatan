@@ -14,36 +14,74 @@
   <nav>
     <ul>
       <li><a href="gejala-penyakit.html">Daftar Gejala dan Penyakit</a></li>
-      <li><a href="base.html" class="back-button">Diagnosa</a></li>
+      <li><a href="base.html">Diagnosa</a></li>
     </ul>
   </nav>
 
-  <!-- Gejala Container -->
-  <div class="gejala-container" id="gejalaContainer"></div>
+  <!-- Gejala -->
+  <div class="gejala-group-container">
+    <div class="gejala-kolom">
+      <h3>Telinga</h3>
+      <div class="gejala" data-index="5">Nyeri telinga</div>
+      <div class="gejala" data-index="19">Tuli</div>
+      <div class="gejala" data-index="31">Radang gendang telinga</div>
+      <div class="gejala" data-index="33">Telinga berdenging</div>
+      <div class="gejala" data-index="34">Telinga terasa penuh</div>
+      <div class="gejala" data-index="35">Tubuh tak seimbang</div>
+    </div>
 
-  <!-- Diagnosa Button -->
+    <div class="gejala-kolom">
+      <h3>Hidung</h3>
+      <div class="gejala" data-index="4">Hidung tersumbat</div>
+      <div class="gejala" data-index="7">Hidung meler</div>
+      <div class="gejala" data-index="14">Pendarahan hidung</div>
+      <div class="gejala" data-index="24">Infeksi sinus</div>
+      <div class="gejala" data-index="26">Nyeri pinggir hidung</div>
+    </div>
+
+    <div class="gejala-kolom">
+      <h3>Tenggorokan</h3>
+      <div class="gejala" data-index="2">Nyeri saat bicara atau menelan</div>
+      <div class="gejala" data-index="6">Nyeri tenggorokan</div>
+      <div class="gejala" data-index="15">Suara serak</div>
+      <div class="gejala" data-index="22">Air liur menetes</div>
+      <div class="gejala" data-index="36">Tenggorokan gatal</div>
+    </div>
+
+    <div class="gejala-kolom">
+      <h3>Umum</h3>
+      <div class="gejala" data-index="0">Demam</div>
+      <div class="gejala" data-index="1">Sakit kepala</div>
+      <div class="gejala" data-index="3">Batuk</div>
+      <div class="gejala" data-index="8">Letih dan lesu</div>
+      <div class="gejala" data-index="9">Mual dan muntah</div>
+      <div class="gejala" data-index="11">Ada benjolan di leher</div>
+      <div class="gejala" data-index="17">Dahi sakit</div>
+      <div class="gejala" data-index="23">Berat badan turun</div>
+      <div class="gejala" data-index="29">Perubahan suara</div>
+    </div>
+  </div>
+
   <button id="diagnosaBtn">Diagnosa Sekarang</button>
 
-  <!-- Hasil Diagnosa -->
   <div id="hasil"></div>
 
-  <script defer>
-    window.addEventListener("DOMContentLoaded", () => {
-      const daftarGejala = [
-        "demam", "sakit kepala", "nyeri saat bicara atau menelan", "batuk", "hidung tersumbat",
-        "nyeri telinga", "nyeri tenggorokan", "hidung meler", "letih dan lesu", "mual dan muntah",
-        "selaput lendir merah dan bengkak", "ada benjolan di leher", "nyeri leher",
-        "pembengkakan kelenjar getah bening", "pendarahan hidung", "suara serak",
-        "bola mata bergerak tanpa sadar", "dahi sakit", "leher bengkak", "tuli",
-        "ada yang tumbuh di mulut", "air liur menetes", "berat badan turun",
-        "bunyi nafas abnormal", "infeksi sinus", "nyeri antara mata", "nyeri pinggir hidung",
-        "nyeri wajah", "perubahan kulit", "perubahan suara", "radang gendang telinga",
-        "sakit gigi", "serangan vertigo", "telinga berdenging", "telinga terasa penuh",
-        "tenggorokan gatal", "tubuh tak seimbang"
-      ];
+  <script>
+    const daftarGejala = [
+      "Demam", "Sakit kepala", "Nyeri saat bicara atau menelan", "Batuk", "Hidung tersumbat",
+      "Nyeri telinga", "Nyeri tenggorokan", "Hidung meler", "Letih dan lesu", "Mual dan muntah",
+      "Selaput lendir merah dan bengkak", "Ada benjolan di leher", "Nyeri leher",
+      "Pembengkakan kelenjar getah bening", "Pendarahan hidung", "Suara serak",
+      "Bola mata bergerak tanpa sadar", "Dahi sakit", "Leher bengkak", "Tuli",
+      "Ada yang tumbuh di mulut", "Air liur menetes", "Berat badan turun",
+      "Bunyi nafas abnormal", "Infeksi sinus", "Nyeri antara mata", "Nyeri pinggir hidung",
+      "Nyeri wajah", "Perubahan kulit", "Perubahan suara", "Radang gendang telinga",
+      "Sakit gigi", "Serangan vertigo", "Telinga berdenging", "Telinga terasa penuh",
+      "Tenggorokan gatal", "Tubuh tak seimbang"
+    ];
 
-      const daftarPenyakit = [
-        { nama: "Contract Ulcers", gejala: [2, 15] },
+    const daftarPenyakit = [
+    { nama: "Contract Ulcers", gejala: [2, 15] },
         { nama: "Abses Parafaringeal", gejala: [2, 18] },
         { nama: "Abses Peritonsiler", gejala: [0, 1, 6, 13, 15, 21] },
         { nama: "Barotitis Media", gejala: [1, 5] },
@@ -67,75 +105,55 @@
         { nama: "Sinusitis Etmoidal", gejala: [0, 1, 3, 4, 7, 8, 10, 17, 25, 26] },
         { nama: "Sinusitis Sfenoidal", gejala: [0, 1, 3, 4, 5, 7, 8, 10, 11] },
         { nama: "Perut", gejala: [0, 1, 2, 3] }
-      ];
+    ];
 
-      const container = document.getElementById("gejalaContainer");
-      const diagnosaBtn = document.getElementById("diagnosaBtn");
-      const hasil = document.getElementById("hasil");
-      const gejalaTerpilih = new Set();
-      const divs = [];
+    const gejalaTerpilih = new Set();
+    const hasil = document.getElementById("hasil");
+    const diagnosaBtn = document.getElementById("diagnosaBtn");
 
-      // Tampilkan daftar gejala
-      daftarGejala.forEach((gejala, index) => {
-        const div = document.createElement('div');
-        div.className = 'gejala';
-        div.dataset.index = index;
-        div.innerText = gejala.charAt(0).toUpperCase() + gejala.slice(1);
-
-        div.addEventListener('click', () => {
-          if (div.classList.contains('selected')) {
-            div.classList.remove('selected');
-            gejalaTerpilih.delete(index);
-          } else {
-            div.classList.add('selected');
-            gejalaTerpilih.add(index);
-          }
-        });
-
-        container.appendChild(div);
-        divs.push(div);
-      });
-
-      // Fungsi Diagnosa
-      diagnosaBtn.addEventListener("click", () => {
-        hasil.innerHTML = "";
-
-        const hasilDiagnosa = daftarPenyakit
-          .map(penyakit => {
-            const cocok = penyakit.gejala.filter(g => gejalaTerpilih.has(g));
-            const persentase = (cocok.length / penyakit.gejala.length) * 100;
-            return {
-              nama: penyakit.nama,
-              cocok,
-              persentase
-            };
-          })
-          .filter(p => p.cocok.length > 0)
-          .sort((a, b) => b.persentase - a.persentase); // urut dari persentase tertinggi
-
-        if (hasilDiagnosa.length === 0) {
-          hasil.innerHTML = "<p><strong>Tidak ada penyakit yang cocok ditemukan.</strong></p>";
+    document.querySelectorAll('.gejala').forEach(el => {
+      el.addEventListener('click', () => {
+        const index = parseInt(el.dataset.index);
+        if (gejalaTerpilih.has(index)) {
+          gejalaTerpilih.delete(index);
+          el.classList.remove('selected');
         } else {
-          hasil.innerHTML = "<h3>Hasil Diagnosa:</h3>";
-          hasilDiagnosa.forEach(penyakit => {
-            const namaGejala = penyakit.cocok.map(i => daftarGejala[i]).join(", ");
-            hasil.innerHTML += `
-              <div>
-                <strong>${penyakit.nama}</strong><br/>
-                Cocok dengan gejala: ${namaGejala}<br/>
-                Persentase kecocokan: ${penyakit.persentase.toFixed(2)}%
-                <hr/>
-              </div>
-            `;
-          });
+          gejalaTerpilih.add(index);
+          el.classList.add('selected');
         }
-
-        // Reset pilihan
-        gejalaTerpilih.clear();
-        divs.forEach(div => div.classList.remove('selected'));
       });
+    });
+
+    diagnosaBtn.addEventListener("click", () => {
+      hasil.innerHTML = "";
+      const hasilDiagnosa = daftarPenyakit
+        .map(penyakit => {
+          const cocok = penyakit.gejala.filter(g => gejalaTerpilih.has(g));
+          const persentase = (cocok.length / penyakit.gejala.length) * 100;
+          return { nama: penyakit.nama, cocok, persentase };
+        })
+        .filter(p => p.cocok.length > 0)
+        .sort((a, b) => b.persentase - a.persentase);
+
+      if (hasilDiagnosa.length === 0) {
+        hasil.innerHTML = "<p><strong>Tidak ada penyakit yang cocok ditemukan.</strong></p>";
+      } else {
+        hasil.innerHTML = "<h3>Hasil Diagnosa:</h3>";
+        hasilDiagnosa.forEach(p => {
+          const namaGejala = p.cocok.map(i => daftarGejala[i]).join(", ");
+          hasil.innerHTML += `
+            <div>
+              <strong>${p.nama}</strong><br/>
+              Cocok dengan gejala: ${namaGejala}<br/>
+              Persentase kecocokan: ${p.persentase.toFixed(2)}%
+              <hr/>
+            </div>`;
+        });
+      }
+
+      gejalaTerpilih.clear();
+      document.querySelectorAll('.gejala').forEach(el => el.classList.remove('selected'));
     });
   </script>
 </body>
-
 </html>
