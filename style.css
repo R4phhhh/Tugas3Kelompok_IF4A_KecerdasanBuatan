@@ -1,6 +1,6 @@
 :root {
   --primary-color: #3f51b5;
-  --secondary-color: #ff7043;
+  --secondary-color: #ff501b;
   --accent-color: #4caf50;
   --light-bg: #f5f7fa;
   --dark-text: #2d3436;
@@ -205,6 +205,14 @@ button#diagnosaBtn:active {
   }
 }
 
+#gejalaContainer {
+  margin: 0px 15%;
+}
+
+#penyakitContainer {
+  margin: 0px 50px 100px;
+}
+
 /* Animation for results */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
@@ -279,6 +287,12 @@ nav .back-button {
 
 nav .back-button:hover {
   color: #ff6e42;
+}
+
+nav ul li a.active,
+nav .back-button.active {
+  color: #ff6e42;
+  font-weight: 600;
 }
 
 /* Responsiveness */
