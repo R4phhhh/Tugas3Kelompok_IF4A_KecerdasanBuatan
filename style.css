@@ -213,7 +213,6 @@ button#diagnosaBtn:active {
   margin: 0px 50px 100px;
 }
 
-/* Animation for results */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -223,7 +222,6 @@ button#diagnosaBtn:active {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Loading state */
 .loading-spinner {
   display: none;
   width: 40px;
@@ -240,18 +238,19 @@ button#diagnosaBtn:active {
   100% { transform: rotate(360deg); }
 }
 
-/* Navbar */
+/* //////////////////////////////////////////////// */
+
 nav {
-  background-color: #3f51b5; /* Warna latar belakang navbar */
-  padding: 1rem 2rem; /* Padding di dalam navbar */
-  width: 100%; /* Memastikan navbar memenuhi lebar penuh */
+  background-color: #3f51b5;
+  padding: 1rem 2rem;
+  width: 100%;
   position: sticky;
   top: 0;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box; /* Menghindari padding mempengaruhi lebar */
+  box-sizing: border-box;
 }
 
 nav ul {
@@ -259,7 +258,7 @@ nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 1.5rem; /* Spasi antar item navbar */
+  gap: 1.5rem;
 }
 
 nav ul li a {
@@ -272,10 +271,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #ff6e42; /* Warna berubah saat hover */
+  color: #ff6e42;
 }
 
-/* Tombol Back */
 nav .back-button {
   color: #fff;
   text-decoration: none;
@@ -295,7 +293,6 @@ nav .back-button.active {
   font-weight: 600;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -315,7 +312,8 @@ nav .back-button.active {
   }
 }
 
-/* Tabel Umum */
+/* //////////////////////////////////////////////// */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -348,7 +346,6 @@ tbody tr:hover {
   transition: var(--transition);
 }
 
-/* Responsive Table */
 @media (max-width: 768px) {
   table, thead, tbody, th, td, tr {
     display: block;
@@ -376,7 +373,6 @@ tbody tr:hover {
     color: #555;
   }
 
-  /* Label untuk kolom */
   .tabel-gejala tbody td:nth-child(1)::before { content: "No"; }
   .tabel-gejala tbody td:nth-child(2)::before { content: "Gejala"; }
 

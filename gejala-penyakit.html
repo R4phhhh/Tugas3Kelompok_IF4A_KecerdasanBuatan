@@ -16,8 +16,6 @@
         </ul>
     </nav>
 
-
-    <!-- Daftar Gejala -->
     <div id="gejalaContainer" class="container">
         <h2>Daftar Gejala</h2>
         <table class="tabel-gejala">
@@ -30,7 +28,6 @@
         </table>
     </div>
 
-    <!-- Daftar Penyakit -->
     <div id="penyakitContainer" class="container">
         <h2>Daftar Penyakit</h2>
         <table class="tabel-penyakit">
@@ -44,7 +41,6 @@
             <tbody class="penyakit-container"></tbody>
         </table>
     </div>
-
 
     <script defer>
         window.addEventListener("DOMContentLoaded", () => {
@@ -88,7 +84,6 @@
                 { nama: "Perut", gejala: [0, 1, 2, 3] }
             ];
 
-            // Tampilkan daftar gejala dalam tabel
             const gejalaContainer = document.querySelector('.gejala-container');
             daftarGejala.forEach((gejala, index) => {
                 const row = document.createElement('tr');
@@ -96,7 +91,6 @@
                 gejalaContainer.appendChild(row);
             });
 
-            // Tampilkan daftar penyakit dalam tabel
             const penyakitContainer = document.querySelector('.penyakit-container');
             daftarPenyakit.forEach((penyakit, index) => {
                 const gejalaList = penyakit.gejala.map(g => daftarGejala[g]).join(", ");
@@ -108,5 +102,4 @@
         });
     </script>
 </body>
-
 </html>
